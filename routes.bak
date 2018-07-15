@@ -1,0 +1,22 @@
+#lang racket
+
+(provide get-calc)
+
+(provide not-allowed)
+
+(provide not-found)
+
+(require "./functions.rkt")
+
+(define (get-calc req x y)
+    (response #:body (format "~a" (multiplication x y))
+		#:mime "application/json")
+)
+
+(define (not-allowed req)
+  (response #:code 405
+	    #:message "Method Not Allowed"))
+
+(define (not-found req)
+  (response #:code 404
+	    #:message "Not Found"))

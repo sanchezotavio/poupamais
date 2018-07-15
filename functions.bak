@@ -1,0 +1,5 @@
+#lang racket
+
+(provide multiplication)
+
+(define (multiplication x y)(* x y))
