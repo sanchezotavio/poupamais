@@ -5,12 +5,13 @@
 
 (define (start req)
   (response/xexpr
-   '(html (head (title "Racket Heroku App"))
-          (body (h1 "It works!")))))
+   '(html (head (title "App web"))
+          (body (h1 "Test")))))
 
 (define port (if (getenv "PORT")
                  (string->number (getenv "PORT"))
                  8080))
+
 (serve/servlet start
                #:servlet-path "/"
                #:listen-ip #f
