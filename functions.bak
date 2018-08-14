@@ -1,5 +1,19 @@
 #lang racket
 
-(provide multiplication)
+(provide multi)
 
-(define (multiplication x y)(* x y))
+(provide sum)
+
+(provide power)
+
+(define (multi x y)(* x y))
+
+(define (sum x y)(+ x y))
+
+(define (power x)(+ x x))
+
+(define (simpleInterest value rate time)
+  (* value rate time))
+
+         
+

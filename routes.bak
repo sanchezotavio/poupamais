@@ -1,22 +1,13 @@
 #lang racket
 
-(provide get-calc)
+(provide calc)
 
-(provide not-allowed)
+(require "functions.rkt")
 
-(provide not-found)
-
-(require "./functions.rkt")
-
-(define (get-calc req x y)
-    (response #:body (format "~a" (multiplication x y))
-		#:mime "application/json")
-)
-
-(define (not-allowed req)
-  (response #:code 405
-	    #:message "Method Not Allowed"))
-
-(define (not-found req)
-  (response #:code 404
-	    #:message "Not Found"))
+(define (calc type x y)
+   (case type
+      [("simple-interest") (simpleInterest value percentInterest timeMonth)]
+      [("multi") (multi x y)]
+      [("power") (power x)]
+     )
+  )

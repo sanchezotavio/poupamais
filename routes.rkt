@@ -4,10 +4,9 @@
 
 (require "functions.rkt")
 
-(define (calc type x y)
+(define (calc type value percentInterest timeMonth)
    (case type
-      [("sum") (sum x y)]
-      [("multi") (multi x y)]
-      [("power") (power x)]
+      [("simple-interest") (simpleInterest value percentInterest timeMonth)]
+      [("interest") (interest value percentInterest timeMonth)]
      )
   )
