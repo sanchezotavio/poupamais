@@ -6,7 +6,6 @@
          web-server/dispatch
 	 json)
 
-(require (file "~/routes/calc.rkt"))
 
 (define (response
 	 #:code    [code/kw 200]
@@ -46,9 +45,17 @@
    headers/kw
    body))
 
+
+(require  "routes.rkt")
+
 (define (symbolify x)
   (string->symbol (format "~a" x)))
 
+
+(define (get-calc req type x y)
+    (response #:body (format "~a" (calc type x y z))
+		#:mime "application/json")
+)
 
 (define (not-allowed req)
   (response #:code 405
@@ -58,11 +65,13 @@
   (response #:code 404
 	    #:message "Not Found"))
 
+
 (define-values (go _)
   (dispatch-rules
-   [("calc" (integer-arg) (integer-arg)) #:method "get" get-calc]
+   [("calc" (string-arg) (integer-arg) (integer-arg)) #:method "get" get-calc]
    [("calc") #:method (regexp ".*") not-allowed]
    [else not-found]))
+
 
 (module+ main
   (serve/servlet

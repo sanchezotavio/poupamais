@@ -49,11 +49,11 @@
 (require  "routes.rkt")
 
 (define (symbolify x)
-  (string->symbol (format "~a" x)))
+  (string->symbol (format "~s" x)))
 
 
-(define (get-calc req type x y)
-    (response #:body (format "~a" (calc type x y))
+(define (get-calc req type x y z)
+    (response #:body  (format "~s" (calc type x y z))
 		#:mime "application/json")
 )
 
@@ -68,7 +68,7 @@
 
 (define-values (go _)
   (dispatch-rules
-   [("calc" (string-arg) (integer-arg) (integer-arg)) #:method "get" get-calc]
+   [("calc" (string-arg) (number-arg) (number-arg) (number-arg)) #:method "get" get-calc]
    [("calc") #:method (regexp ".*") not-allowed]
    [else not-found]))
 
