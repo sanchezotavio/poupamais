@@ -10,7 +10,6 @@
       [("interest") (interest value percent time)]
       [("interest-time") (interestTime value percent time)]
       [("financing-value-month") (financingValueMonth value percent time) ]
-      [("financing-value-month") (financingValueMonth value percent time) ]
       [("financial-independence-value") (financialIndependenceValue value percent)]
       [("financial-independence-month") (financialIndependenceMonth value percent)]
      )

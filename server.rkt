@@ -6,6 +6,9 @@
          web-server/dispatch
 	 json)
 
+ (require web-server/http/request-structs)
+
+
 
 (define (response
 	 #:code    [code/kw 200]
@@ -54,9 +57,11 @@
 
 (define (get-calc req type x y z)
     (response #:body  (format "~s" (calc type x y z))
-		#:mime "application/json")
-)
-
+		#:mime #t
+                #:headers   (list 
+                          (make-header #"Access-Control-Allow-Origin" #"*")
+                          )))
+     
 (define (not-allowed req)
   (response #:code 405
 	    #:message "Method Not Allowed"))
