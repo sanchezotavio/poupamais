@@ -16,28 +16,27 @@
 
 ;; Juros Simples
 (define (simpleInterest value percentInterest timeMonth)
-  (exact->inexact (* value  timeMonth (percent percentInterest))))
+  (round-off (exact->inexact (* value  timeMonth (percent percentInterest))) 2 ))
 
 ;; Juros Composto
 (define (interest value percentInterest timeMonth)
-  (exact->inexact (* value  (expt (+ 1 (percent percentInterest)) timeMonth))))
+  (round-off  (exact->inexact (- (* value  (expt (+ 1 (percent percentInterest)) timeMonth)) value)) 2 ))
 
-;; Um capital de R$ 75.000,00 aplicado a uma taxa de juro composto de 1,5% a.m., precisa de quantos meses para resultar em um montante de R$ 84.486,94
+
 (define (interestTime value percentInterest total)
-  (exact->inexact (/ (log (/ total value) 10) (log (+ 1 (percent percentInterest)) 10))))
+   (round-off(exact->inexact (/ (log (/ total value) 10) (log (+ 1 (percent percentInterest)) 10))) 2 ))
 
 ;; Calculo Mensalidade do Financiamento
 (define (financingValueMonth total percentInterest timeMonth )
- (exact->inexact (* total (/ (percent percentInterest) (- 1(/ 1 (expt (+ 1 (percent percentInterest)) timeMonth)))))))
+  (round-off (exact->inexact (* total (/ (percent percentInterest) (- 1(/ 1 (expt (+ 1 (percent percentInterest)) timeMonth)))))) 2 ))
 
 ;; Quanto Preciso para obter a independecia financeira
 (define (financialIndependenceValue value percentInterest)
-  (exact->inexact (/ (* value 12) (percent percentInterest))))
+   (round-off (exact->inexact (/ value (percent percentInterest))) 2 ))
 
 ;; Quanto tempo você irá demorar para alcançar sua independencia financeira -> O que eu tenho - Porcentagem - porcentagem
-(define (financialIndependenceMonth value percentInterest)
-  (exact->inexact (interestTime value percentInterest (financialIndependenceValue value  percentInterest)))
-)
+(define (financialIndependenceMonth value percentInterest time)
+   (round-off (exact->inexact (interestTime value percentInterest (financialIndependenceValue value  percentInterest))) 2 ))
 
 
 
